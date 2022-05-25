@@ -18,7 +18,7 @@ public class MessageJdbcController {
     
     private final MessageJdbcService messageJdbcService;
 
-    @PostMapping("/messages")
+    @PostMapping("/jdbc/messages")
     public ResponseEntity<Message> saveMessage(@RequestBody MessageData data) {
         Message saved = messageJdbcService.save(data.getText());
         if (saved == null) {
