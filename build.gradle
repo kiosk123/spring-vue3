@@ -35,6 +35,9 @@ dependencies {
 	implementation 'org.springframework.data:spring-data-rest-hal-browser:3.3.9.RELEASE'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 
+	//jdbc api
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 	// implementation 'org.springframework.boot:spring-boot-starter-security'
 
 	//querydsl 추가 
