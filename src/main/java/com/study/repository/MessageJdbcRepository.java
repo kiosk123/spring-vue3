@@ -29,7 +29,7 @@ public class MessageJdbcRepository {
     public Message saveMessage(Message message) {
         Connection c = DataSourceUtils.getConnection(dataSource);
         try {
-            String insertSql = "INSERT INTO messages ('id', 'text', 'created_date') VALUE (null, ?, ?)";
+            String insertSql = "INSERT INTO messages(id, text, created_date) VALUES(null, ?, ?)";
             PreparedStatement ps = c.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
             //SQL에 필요한 매개변수를 준비한다
             ps.setString(1, message.getText());
