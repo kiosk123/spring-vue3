@@ -28,7 +28,7 @@ public class MessageJdbcTemplateRepository {
         GeneratedKeyHolder holder = new GeneratedKeyHolder();
         MapSqlParameterSource params = new MapSqlParameterSource();
         params.addValue("text", message.getText());
-        params.addValue("createdData", message.getCreatedDate());
+        params.addValue("createdDate", message.getCreatedDate());
 
         String insertSql = "INSERT INTO messages(id, text, created_date) VALUES(null, :text, :createdDate)";
         
@@ -38,6 +38,18 @@ public class MessageJdbcTemplateRepository {
             log.error("Failed to save message", e);
             return null;
         }
-        return new Message(holder.getKey().intValue(), message.getText(), message.getCreatedDate());
+
+        /**
+         * The getKey method should only be used when a single key is returned. 
+         * The current key entry contains multiple keys: [{ID=6, CREATED_DATE=2022-05-25 14:23:40.359}]] with root cause
+         * 에러 발생대문에 추가한 로직...
+         */
+        int generatedKeyValue = holder.getKeyList().stream()
+            .filter(map -> map.keySet().iterator().next().equals("ID"))
+            .mapToInt(map -> (Integer)map.get("ID"))
+            .sum();
+
+        log.warn("holder's key value is {}", generatedKeyValue);
+        return new Message(generatedKeyValue, message.getText(), message.getCreatedDate());
     }
 }
