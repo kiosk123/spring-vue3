@@ -45,7 +45,7 @@ public class MessageJdbcTemplateRepository {
          * 에러 발생대문에 추가한 로직...
          */
         int generatedKeyValue = holder.getKeyList().stream()
-            .filter(map -> map.keySet().iterator().next().equals("ID"))
+            .filter(map -> map.keySet().iterator().next().equalsIgnoreCase("ID"))
             .mapToInt(map -> (Integer)map.get("ID"))
             .sum();
 
