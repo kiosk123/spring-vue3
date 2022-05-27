@@ -12,7 +12,7 @@ import org.springframework.web.servlet.i18n.SessionLocaleResolver;
 @EnableJpaAuditing
 @SpringBootApplication
 public class StartApplication {
-
+	
 	public static void main(String[] args) {
 		SpringApplication.run(StartApplication.class, args);
 	}
